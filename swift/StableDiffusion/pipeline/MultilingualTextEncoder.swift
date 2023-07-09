@@ -44,7 +44,7 @@ public struct MultilingualTextEncoder: TextEncoderModel {
     /// Unloads the model resources to free up memory.
     public func unloadResources() {
         adapter?.unloadResources()
-        embeddingModel.unload()
+        //embeddingModel.unload()
     }
 
     /// Encodes the input text.
