@@ -32,13 +32,13 @@ public struct MultilingualTextEncoder: TextEncoderModel {
             self.adapter = nil
         }
         //self.embeddingModel = NLContextualEmbedding(script: script.asNLScript)!
-        self.embeddingModel.requestAssets { _, _ in }
+        //self.embeddingModel.requestAssets { _, _ in }
     }
 
     /// Loads model resources into memory.
     public func loadResources() throws {
         try adapter?.loadResources()
-        try embeddingModel.load()
+        //try embeddingModel.load()
     }
 
     /// Unloads the model resources to free up memory.
@@ -52,9 +52,9 @@ public struct MultilingualTextEncoder: TextEncoderModel {
     ///  - Parameter text: The input text.
     ///  - Returns: An embedding shaped array.
     public func encode(_ text: String) throws -> MLShapedArray<Float> {
-        guard embeddingModel.hasAvailableAssets else {
+        //guard embeddingModel.hasAvailableAssets else {
             throw Error.missingEmbeddingResource
-        }
+        //}
 
         return MLShapedArray<Float>()
         // Create the text embedding result.
