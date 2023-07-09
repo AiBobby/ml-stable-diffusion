@@ -9,7 +9,7 @@ import CoreML
 public struct MultilingualTextEncoder: TextEncoderModel {
     let adapter: ManagedMLModel?
 
-    let embeddingModel: NLContextualEmbedding
+    //let embeddingModel: NLContextualEmbedding
 
     // TODO: use maximum sequence length from embedding.
     let maximumEmbeddingSequenceLength = 256
@@ -31,7 +31,7 @@ public struct MultilingualTextEncoder: TextEncoderModel {
         } else {
             self.adapter = nil
         }
-        self.embeddingModel = NLContextualEmbedding(script: script.asNLScript)!
+        //self.embeddingModel = NLContextualEmbedding(script: script.asNLScript)!
         self.embeddingModel.requestAssets { _, _ in }
     }
 
@@ -56,8 +56,9 @@ public struct MultilingualTextEncoder: TextEncoderModel {
             throw Error.missingEmbeddingResource
         }
 
+        return MLShapedArray<Float>()
         // Create the text embedding result.
-        let embedding = try embeddingModel.embeddingResult(for: text, language: nil)
+        /*let embedding = try embeddingModel.embeddingResult(for: text, language: nil)
 
         // Create embedding array from token vectors.
         var shapedEmbeddings = MLShapedArray<Double>(
@@ -82,6 +83,7 @@ public struct MultilingualTextEncoder: TextEncoderModel {
             // Project the embeddings to the correct CLIP model input shape of [1, 768, 1, 256].
             return try projectEmbeddings(shapedEmbeddings)
         }
+        */
     }
 
     /// Creates the adapter model input feature provider.
@@ -179,6 +181,7 @@ extension MultilingualTextEncoder {
 public enum Script: String {
     case latin, cyrillic, cjk
 
+/*
     @available(iOS 17.0, macOS 14.0, *)
     var asNLScript: NLScript {
         switch self {
@@ -187,4 +190,5 @@ public enum Script: String {
         case .cjk: return .simplifiedChinese
         }
     }
+*/
 }
